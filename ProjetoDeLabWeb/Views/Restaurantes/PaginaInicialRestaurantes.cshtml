@@ -1,0 +1,113 @@
+﻿@model IEnumerable<ProjetoDeLabWeb.Models.Restaurante>
+@using Microsoft.AspNetCore.Http;
+
+
+@{
+    ViewData["Title"] = "PaginaInicialRestaurantes";
+}
+
+<h1>Restaurantes</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Foto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Morada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gps)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HorarioFunc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaDescanco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoServico)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.RestauranteAceite == true)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefone)
+                    </td>
+                    @if (item.Foto == null)
+                    {
+                        <td>
+                            <a>----</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <img src="~/@item.Foto" />
+                        </td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Morada)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gps)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HorarioFunc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DiaDescanco)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoServico)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.IdRestaurante">Details</a> |
+                    </td>
+                    @if (Context.Session.GetString("utilizadorId") == null)
+                    {
+                        <td>
+                            <a asp-action="ErroPrecisaEstarLogado" asp-controller="PreferemRestaurantes">Adicionar aos favoritos</a>
+                        </td>
+                    }
+                    else
+                    {
+                        if (Context.Session.GetString("LigacaoFavorito-" + item.IdRestaurante + "-" + Context.Session.GetString("utilizadorId")) == null || Context.Session.GetString("LigacaoFavorito-" + item.IdRestaurante + "-" + Context.Session.GetString("utilizadorId")) == "false")
+                        {
+                            <td>
+                                <a asp-action="MeterRestauranteFavorito" asp-route-id="@item.IdRestaurante" asp-controller="PreferemRestaurantes">Adicionar aos favoritos</a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <a asp-action="RemoverRestauranteFavorito" asp-route-id="@item.IdRestaurante" asp-controller="PreferemRestaurantes">Remover dos favoritos</a>
+                            </td>
+                        }
+
+                    }
+
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>

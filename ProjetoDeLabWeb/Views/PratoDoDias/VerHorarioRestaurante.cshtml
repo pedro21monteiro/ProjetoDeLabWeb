@@ -1,0 +1,294 @@
+﻿@model IEnumerable<ProjetoDeLabWeb.Models.PratoDoDia>
+@using Microsoft.AspNetCore.Http;
+
+@{
+    ViewData["Title"] = "VerHorarioRestaurante";
+}
+
+<h1>GerirHorarioRestaurante</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a>Segunda-feira</a>
+            </th>
+            <th>
+                <a>terça-feira</a>
+            </th>
+            <th>
+                <a>Quarta-feira</a>
+            </th>
+            <th>
+                <a>Quinta-feira</a>
+            </th>
+            <th>
+                <a>Sexta-feira</a>
+            </th>
+            <th>
+                <a>Sabado</a>
+            </th>
+            <th>
+                <a>Domingo</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>
+                @foreach (var item in Model)
+                {
+                    if (item.IdPratoDoDia == Int32.Parse(Context.Session.GetString("IdPratoDoDia_SegundaFeira")))
+                    {
+                        if (item.Folga == true)
+                        {
+                            <br />
+                            <br />
+                            <a>Dia de Folga</a>
+                            <br />
+                            <br />
+                            <br />
+               
+                        }
+                        else
+                        {
+
+                            <a> @Html.DisplayFor(modelItem => item.Descricao)</a>
+                            <br />
+                            if (item.Foto == null)
+                            {
+                                <a>----</a>
+                            }
+                            else
+                            {
+                                <img src="~/@item.Foto" style="max-width:140px" />
+                            }
+                            <br />
+                            <a>  @Html.DisplayFor(modelItem => item.Tipo)</a>
+                            <br />
+                
+                        }
+                    }
+                }
+
+            <th>
+                @foreach (var item in Model)
+                {
+                    if (item.IdPratoDoDia == Int32.Parse(Context.Session.GetString("IdPratoDoDia_TercaFeira")))
+                    {
+                        if (item.Folga == true)
+                        {
+                            <br />
+                            <br />
+                            <a>Dia de Folga</a>
+                            <br />
+                            <br />
+                            <br />
+                       
+                        }
+                        else
+                        {
+
+                            <a> @Html.DisplayFor(modelItem => item.Descricao)</a>
+                            <br />
+                            if (item.Foto == null)
+                            {
+                                <a>----</a>
+                            }
+                            else
+                            {
+                                <img src="~/@item.Foto" style="max-width:140px" />
+                            }
+                            <br />
+                            <a>  @Html.DisplayFor(modelItem => item.Tipo)</a>
+                            <br />
+                          
+                        }
+                    }
+                }
+            </th>
+            <th>
+                @foreach (var item in Model)
+                {
+                    if (item.IdPratoDoDia == Int32.Parse(Context.Session.GetString("IdPratoDoDia_QuartaFeira")))
+                    {
+                        if (item.Folga == true)
+                        {
+                            <br />
+                            <br />
+                            <a>Dia de Folga</a>
+                            <br />
+                            <br />
+                            <br />
+                        
+                        }
+                        else
+                        {
+
+                            <a> @Html.DisplayFor(modelItem => item.Descricao)</a>
+                            <br />
+                            if (item.Foto == null)
+                            {
+                                <a>----</a>
+                            }
+                            else
+                            {
+                                <img src="~/@item.Foto" style="max-width:140px" />
+                            }
+                            <br />
+                            <a>  @Html.DisplayFor(modelItem => item.Tipo)</a>
+                            <br />
+                       
+                        }
+                    }
+                }
+            </th>
+            <th>
+                @foreach (var item in Model)
+                {
+                    if (item.IdPratoDoDia == Int32.Parse(Context.Session.GetString("IdPratoDoDia_QuintaFeira")))
+                    {
+                        if (item.Folga == true)
+                        {
+                            <br />
+                            <br />
+                            <a>Dia de Folga</a>
+                            <br />
+                            <br />
+                            <br />
+
+                        }
+                        else
+                        {
+
+                            <a> @Html.DisplayFor(modelItem => item.Descricao)</a>
+                            <br />
+                            if (item.Foto == null)
+                            {
+                                <a>----</a>
+                            }
+                            else
+                            {
+                                <img src="~/@item.Foto" style="max-width:140px" />
+                            }
+                            <br />
+                            <a>  @Html.DisplayFor(modelItem => item.Tipo)</a>
+                            <br />
+                         
+                        }
+                    }
+                }
+            </th>
+            <th>
+                @foreach (var item in Model)
+                {
+                    if (item.IdPratoDoDia == Int32.Parse(Context.Session.GetString("IdPratoDoDia_SextaFeira")))
+                    {
+                        if (item.Folga == true)
+                        {
+                            <br />
+                            <br />
+                            <a>Dia de Folga</a>
+                            <br />
+                            <br />
+                            <br />
+                        
+                        }
+                        else
+                        {
+
+                            <a> @Html.DisplayFor(modelItem => item.Descricao)</a>
+                            <br />
+                            if (item.Foto == null)
+                            {
+                                <a>----</a>
+                            }
+                            else
+                            {
+                                <img src="~/@item.Foto" style="max-width:140px" />
+                            }
+                            <br />
+                            <a>  @Html.DisplayFor(modelItem => item.Tipo)</a>
+                            <br />
+                         
+                        }
+                    }
+                }
+            </th>
+            <th>
+                @foreach (var item in Model)
+                {
+                    if (item.IdPratoDoDia == Int32.Parse(Context.Session.GetString("IdPratoDoDia_Sabado")))
+                    {
+                        if (item.Folga == true)
+                        {
+                            <br />
+                            <br />
+                            <a>Dia de Folga</a>
+                            <br />
+                            <br />
+                            <br />
+                      
+                        }
+                        else
+                        {
+
+                            <a> @Html.DisplayFor(modelItem => item.Descricao)</a>
+                            <br />
+                            if (item.Foto == null)
+                            {
+                                <a>----</a>
+                            }
+                            else
+                            {
+                                <img src="~/@item.Foto" style="max-width:140px" />
+                            }
+                            <br />
+                            <a>  @Html.DisplayFor(modelItem => item.Tipo)</a>
+                            <br />
+                     
+                        }
+                    }
+                }
+            </th>
+            <th>
+                @foreach (var item in Model)
+                {
+                    if (item.IdPratoDoDia == Int32.Parse(Context.Session.GetString("IdPratoDoDia_Domingo")))
+                    {
+                        if (item.Folga == true)
+                        {
+                            <br />
+                            <br />
+                            <a>Dia de Folga</a>
+                            <br />
+                            <br />
+                            <br />
+                      
+                        }
+                        else
+                        {
+
+                            <a> @Html.DisplayFor(modelItem => item.Descricao)</a>
+                            <br />
+                            if (item.Foto == null)
+                            {
+                                <a>----</a>
+                            }
+                            else
+                            {
+                                <img src="~/@item.Foto" style="max-width:140px" />
+                            }
+                            <br />
+                            <a>  @Html.DisplayFor(modelItem => item.Tipo)</a>
+                            <br />
+                        
+                        }
+                    }
+                }
+            </th>
+        </tr>
+
+    </tbody>
+</table>
+

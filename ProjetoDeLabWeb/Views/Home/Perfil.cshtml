@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+@{
+    ViewData["Title"] = "Perfil";
+}
+
+<h1>@Context.Session.GetString("utilizador")</h1>
+
+<br />
+<br />
+
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-route-id="@Int32.Parse(Context.Session.GetString("utilizadorId"))" asp-controller="Utilizadors" asp-action="DetailsPerfilUtilizador">Detalhes</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Restaurantes" asp-action="MeusRestaurantes">Meus Restaurante</a>
+</li>
+@*Falta Editar este*@
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Restaurantes" asp-action="ListaDeRestaurantesPreferidos">Lista de Restaurantes Preferidos</a>
+</li>
+@*Falta Editar este*@
+
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-route-id="@Int32.Parse(Context.Session.GetString("utilizadorId"))" asp-controller="Utilizadors" asp-action="EditarPassword">Editar Password</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-route-id="@Int32.Parse(Context.Session.GetString("utilizadorId"))" asp-controller="Utilizadors" asp-action="EditarEmail">Editar Email</a>
+</li>
+
+
+
+<div>
+    <a asp-action="Index" asp-controller="Home">Voltar</a>
+</div>
+

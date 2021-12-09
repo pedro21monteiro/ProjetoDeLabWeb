@@ -1,0 +1,72 @@
+﻿@model ProjetoDeLabWeb.Models.PratoDoDia
+@using Microsoft.AspNetCore.Http;
+
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>PratoDoDia</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Foto)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="~/@Html.DisplayFor(model => model.Foto)" style="max-width:140px" />
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DiaDaSemana)
+        </dt>
+        <dd class="col-sm-10">
+            @if (Context.Session.GetString("DiaDaSemanaPratoDoDia_Details") == "SegundaFeira")
+            {
+                <a>Segunda-Feira</a>
+            }@if (Context.Session.GetString("DiaDaSemanaPratoDoDia_Details") == "TercaFeira")
+            {
+                <a>Terça-Feira</a>
+            }@if (Context.Session.GetString("DiaDaSemanaPratoDoDia_Details") == "QuartaFeira")
+            {
+                <a>Quarta-Feira</a>
+            }@if (Context.Session.GetString("DiaDaSemanaPratoDoDia_Details") == "QuintaFeira")
+            {
+                <a>Quinta-Feira</a>
+            }@if (Context.Session.GetString("DiaDaSemanaPratoDoDia_Details") == "SextaFeira")
+            {
+                <a>Sexta-Feira</a>
+            }
+            @if (Context.Session.GetString("DiaDaSemanaPratoDoDia_Details") == "Sabado")
+            {
+                <a>Sábado</a>
+            }@if (Context.Session.GetString("DiaDaSemanaPratoDoDia_Details") == "Domingo")
+            {
+                <a>Domingo</a>
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+        <dt class="col-sm-2">
+            <a>Restaurante</a>
+        </dt>
+        <dd class="col-sm-10">
+            <a asp-action="Details" asp-controller="Restaurantes" asp-route-id="@Model.RestauranteId"> @Html.DisplayFor(model => model.restaurante.Nome)</a>
+        </dd>
+    </dl>
+</div>
+<div>
+    @*<a asp-action="Edit" asp-route-id="@Model.IdPratoDoDia">Edit</a> |*@
+    <a asp-action="PaginaInicialPratoDoDia" asp-controller="PratoDoDias" >Voltar</a>
+</div>

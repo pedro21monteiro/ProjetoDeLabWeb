@@ -1,0 +1,106 @@
+﻿@model IEnumerable<ProjetoDeLabWeb.Models.Restaurante>
+@using Microsoft.AspNetCore.Http;
+
+@{
+    ViewData["Title"] = "Pedidos";
+}
+
+
+@if (Context.Session.GetString("categoria") == "Admin" && Context.Session.GetString("categoria") != "true")
+{
+    <h1>Pedidos de Restaurantes</h1>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telefone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Foto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Morada)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gps)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HorarioFunc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DiaDescanco)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TipoServico)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UtilizadorDono.UserName)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                @if (@item.RestauranteAceite == false)
+                {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                @if (item.Foto == null)
+                {
+                    <td>
+                        <a>----</a>
+                    </td>
+                }
+                else
+                {
+            <td>
+                <img src="~/@item.Foto" style="max-width:140px" />
+            </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Morada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gps)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HorarioFunc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaDescanco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoServico)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UtilizadorDono.UserName)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.IdRestaurante">Details</a> |
+                    <a asp-action="ClicouAceitarRestaurante" asp-route-id="@item.IdRestaurante">Aceitar</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdRestaurante">Rejeitar</a>
+                </td>
+            </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h1>Voce não tem autorização para aceder a esta página</h1>
+}
+
+
+

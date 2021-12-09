@@ -1,0 +1,26 @@
+﻿@model ProjetoDeLabWeb.Models.Utilizador
+@using Microsoft.AspNetCore.Http;
+
+
+@{
+    ViewData["Title"] = "ContaBloqueada";
+}
+
+@if (Context.Session.GetString("Bloqueado") == "true")
+{
+    <h1> A sua conta foi bloqueada pelo administrador do site</h1>
+
+<br />
+<br />
+<div>Motivo:</div>
+<br />
+<br />
+<div>@Context.Session.GetString("Motivo")</div>
+
+
+}
+else
+{
+    <h1>Voce não tem autorização para aceder a esta página</h1>
+}
+

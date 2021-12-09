@@ -1,0 +1,136 @@
+﻿@model IEnumerable<ProjetoDeLabWeb.Models.Utilizador>
+@using Microsoft.AspNetCore.Http;
+
+
+@{
+    ViewData["Title"] = "GerirUtilizadores";
+}
+
+@if (Context.Session.GetString("categoria") == "Admin" && Context.Session.GetString("categoria") != "true")
+{
+    <h1>GerirUtilizadores</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Bloqueado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Categoria)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                if (item.UserName != "PedroMonteiro" && item.Bloqueado != true && item.Categoria != "Admin")
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            <a>Não</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Categoria)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.IdUtilizador">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@item.IdUtilizador">Delete</a> |
+                            <a asp-action="ClicouBloquear" asp-route-id="@item.IdUtilizador">Bloquear</a>|
+                            <a asp-action="ClicouDarAdmin" asp-route-id="@item.IdUtilizador">Dar Admin</a>
+                        </td>
+                    </tr>
+                }
+                if (item.UserName != "PedroMonteiro" && item.Bloqueado == true && item.Categoria != "Admin")
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            <a>Sim</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Categoria)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.IdUtilizador">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@item.IdUtilizador">Delete</a> |
+                            <a asp-action="ClicouDesbloquear" asp-route-id="@item.IdUtilizador">Desbloquear</a> |
+                            <a asp-action="ClicouDarAdmin" asp-route-id="@item.IdUtilizador">Dar Admin</a>
+                        </td>
+                    </tr>
+                }
+                if (item.UserName != "PedroMonteiro" && item.Bloqueado == true && item.Categoria == "Admin")
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            <a>Sim</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Categoria)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.IdUtilizador">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@item.IdUtilizador">Delete</a> |
+                            <a asp-action="ClicouDesbloquear" asp-route-id="@item.IdUtilizador">Desbloquear</a> |
+                            <a asp-action="ClicouRetirarAdmin" asp-route-id="@item.IdUtilizador">Retirar Admin</a>
+                        </td>
+                    </tr>
+                }
+                if (item.UserName != "PedroMonteiro" && item.Bloqueado != true && item.Categoria == "Admin")
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            <a>Não</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Categoria)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.IdUtilizador">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@item.IdUtilizador">Delete</a> |
+                            <a asp-action="ClicouBloquear" asp-route-id="@item.IdUtilizador">Bloquear</a> |
+                            <a asp-action="ClicouRetirarAdmin" asp-route-id="@item.IdUtilizador">Retirar Admin</a>
+                        </td>
+                    </tr>
+                }
+            }
+
+
+        </tbody>
+    </table>
+}
+else
+{
+    <h1>Voce não tem autorização para aceder a esta página</h1>
+}
+

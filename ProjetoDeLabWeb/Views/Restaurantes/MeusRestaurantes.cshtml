@@ -1,0 +1,204 @@
+﻿@model IEnumerable<ProjetoDeLabWeb.Models.Restaurante>
+@using Microsoft.AspNetCore.Http;
+
+@{
+    ViewData["Title"] = "MeusRestaurantes";
+}
+@*Restaurantes aceites pelo admin*@
+@if (Context.Session.GetString("utilizador") != null)
+{
+    <h1>Meus Restaurantes</h1>
+
+    <p>
+        <a asp-action="Create">Adicionar Restaurante</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telefone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Foto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Morada)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gps)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HorarioFunc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DiaDescanco)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TipoServico)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UtilizadorDono.UserName)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                @if (@item.UtilizadorDono.UserName == @Context.Session.GetString("utilizador") && item.RestauranteAceite == true)
+                {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                @if (item.Foto == null)
+                {
+            <td>
+
+                <a>----</a>
+            </td>
+                    
+                }
+                else
+                {
+                    <td>
+                        <img src="~/@item.Foto" style="max-width:140px" />
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Morada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gps)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HorarioFunc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaDescanco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoServico)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UtilizadorDono.UserName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdRestaurante">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdRestaurante">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdRestaurante">Delete</a> |
+                    <a asp-action="ClicouGerirHorarioRestaurante" asp-controller="PratoDoDias" asp-route-id="@item.IdRestaurante">Gerir horario do restaurante</a>
+                </td>
+            </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <br />
+
+}@if (Context.Session.GetString("utilizador") != null)
+{
+    <h1>Pedidos de restaurante em espera</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telefone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Foto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Morada)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gps)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HorarioFunc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DiaDescanco)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TipoServico)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UtilizadorDono.UserName)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                @if (@item.UtilizadorDono.UserName == @Context.Session.GetString("utilizador") && item.RestauranteAceite == false)
+                {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                @if (item.Foto == null)
+                {
+                    <td>
+                        <a>----</a>
+                    </td>
+                }
+                else
+                {
+            <td>
+                <img src="~/@item.Foto" />
+            </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Morada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gps)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HorarioFunc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaDescanco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoServico)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UtilizadorDono.UserName)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.IdRestaurante">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdRestaurante">Delete</a>
+
+                </td>
+            </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <a asp-action="Perfil" asp-controller="Home">Voltar</a>
+    </div>
+}
+else
+{
+    <h1>Voce não tem autorização para aceder a esta página</h1>
+}
+

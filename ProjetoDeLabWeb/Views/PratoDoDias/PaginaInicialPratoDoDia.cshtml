@@ -1,0 +1,104 @@
+﻿@model IEnumerable<ProjetoDeLabWeb.Models.PratoDoDia>
+
+@{
+    ViewData["Title"] = "PaginaInicialPratoDoDia";
+}
+
+<h1>Pratos do dia</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Foto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaDaSemana)
+            </th>
+            <th>
+                Restaurante
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @if (item.Descricao != "" && item.Foto != "" && item.Tipo != "" && item.Descricao != null && item.Foto != null && item.Tipo != null)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                @if (item.Foto == null)
+                {
+                    <td>
+                        <a>----</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <img src="~/@item.Foto" style="max-width:140px" />
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tipo)
+                </td>
+                if (item.DiaDaSemana == "SegundaFeira")
+                {
+                    <td>
+                        <a>Segunda-Feira</a>
+                    </td>
+                }
+                if (item.DiaDaSemana == "TercaFeira")
+                {
+                    <td>
+                        <a>Terça-Feira</a>
+                    </td>
+                }
+                if (item.DiaDaSemana == "QuartaFeira")
+                {
+                    <td>
+                        <a>Quarta-Feira</a>
+                    </td>
+                }
+                if (item.DiaDaSemana == "QuintaFeira")
+                {
+                    <td>
+                        <a>Quinta-Feira</a>
+                    </td>
+                }
+                if (item.DiaDaSemana == "SextaFeira")
+                {
+                    <td>
+                        <a>Sexta-Feira</a>
+                    </td>
+                }
+                if (item.DiaDaSemana == "Sabado")
+                {
+                    <td>
+                        <a>Sábado</a>
+                    </td>
+                }
+                if (item.DiaDaSemana == "Domingo")
+                {
+                    <td>
+                        <a>Domingo</a>
+                    </td>
+                }
+        <td>
+            <a asp-action="Details" asp-controller="Restaurantes" asp-route-id="@item.RestauranteId"> @Html.DisplayFor(modelItem => item.restaurante.Nome)</a>
+        </td>
+            }
+
+        </tr>
+}
+    </tbody>
+</table>
